@@ -11,15 +11,16 @@
 		"url": "https://github.com/polygonjs/create-polygonjs-utils"
 	},
 	"bin": {
-		"polygonjs_build_s3": "dist/s3/build.js"
+		"polygonjs_build_s3": "dist/s3/build.cjs"
 	},
 	"scripts": {
 		"dev": "vite",
-		"build": "rm -rf dist/* && yarn build_clean_build && yarn build_s3_build && yarn build_s3_upload",
+		"build": "rm -rf dist/* && yarn build_clean_build && yarn build_s3_build && yarn build_s3_upload && yarn prepare_bin",
 		"preview": "vite preview",
 		"build_clean_build": "esbuild src/cleanBuild.ts --bundle --platform=node --target=node16.15.1 --outfile=dist/cleanBuild.cjs",
 		"build_s3_upload": "esbuild src/s3/upload.ts --bundle --platform=node --target=node16.15.1 --outfile=dist/s3/upload.cjs",
-		"build_s3_build": "esbuild src/s3/build.ts --bundle --platform=node --target=node16.15.1 --outfile=dist/s3/build.cjs"
+		"build_s3_build": "esbuild src/s3/build.ts --bundle --platform=node --target=node16.15.1 --outfile=dist/s3/build.cjs",
+		"prepare_bin": "echo '#!/usr/bin/env node\n'|cat - dist/s3/build.cjs > /tmp/out && mv /tmp/out dist/s3/build.cjs && chmod +x dist/s3/build.cjs"
 	},
 	"devDependencies": {
 		"@types/node": "20.8.10",
