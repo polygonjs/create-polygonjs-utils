@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import * as fs from 'fs';
 import {spawn} from 'child_process';
-import {baseUrl} from './awsCommon.js';
+import {baseUrl} from './common.js';
 
 interface CmdWithArgs {
 	cmd: string;
@@ -62,7 +62,7 @@ async function executeCommand(command: string, args: string[]): Promise<void> {
 	});
 }
 
-export async function buildForS3() {
+ async function buildForS3() {
 	// write config
 	const s3ConfigFileName = `vite.config.s3.ts`;
 	fs.writeFileSync(s3ConfigFileName, VITE_CONFIG);
@@ -82,4 +82,6 @@ export async function buildForS3() {
 	// delete config
 	fs.rmSync(s3ConfigFileName);
 }
+
+buildForS3()
 

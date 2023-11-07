@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "yarn build_s3_build && yarn build_s3_upload",
+    "preview": "vite preview",
+    "build_s3_upload": "tsc src/s3/upload.ts --target ESNext --module nodenext --moduleResolution nodenext --strict false --esModuleInterop true --skipLibCheck true --preserveConstEnums true --isolatedModules --allowJs --removeComments false --declaration false --outDir dist/s3",
+		"build_s3_build": "tsc src/s3/build.ts --target ESNext --module nodenext --moduleResolution nodenext --strict false --esModuleInterop true --skipLibCheck true --preserveConstEnums true --isolatedModules --allowJs --removeComments false --declaration false --outDir dist/s3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "6.10.0",

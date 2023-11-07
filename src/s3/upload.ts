@@ -1,6 +1,6 @@
 import {PutObjectCommand, PutObjectCommandInput} from '@aws-sdk/client-s3';
 import chalk from 'chalk';
-import {EXPORT_FOLDER, bucketName, bucketFolder, sceneName, version, createS3Client, baseUrl} from './awsCommon.js';
+import {EXPORT_FOLDER, bucketName, bucketFolder, sceneName, version, createS3Client, baseUrl} from './common.js';
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -114,6 +114,8 @@ async function _uploadToS3(exportFolder:string) {
 	notifyUploadCompleted(totalCount);
 }
 
-export function uploadToS3(){
+ function uploadToS3(){
     _uploadToS3(EXPORT_FOLDER);
 }
+
+uploadToS3()
