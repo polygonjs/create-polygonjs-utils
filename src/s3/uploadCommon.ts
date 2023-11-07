@@ -1,5 +1,6 @@
 import {PutObjectCommand, PutObjectCommandInput} from '@aws-sdk/client-s3';
 import chalk from 'chalk';
+import mimeTypes from 'mime-types';
 import {EXPORT_FOLDER, bucketName, bucketFolder, sceneName, version, createS3Client, baseUrl} from './common.js';
 
 import * as fs from 'fs';
@@ -42,7 +43,8 @@ function getContentType(filePath: string) {
 	if (filePathWithoutCompressionExt.endsWith('.json')) {
 		return 'application/json';
 	}
-	return 'application/octet-stream';
+	// images and videos are better handled by mime-types
+	return mimeTypes.lookup(filePathWithoutCompressionExt) || 'application/octet-stream';
 }
 function getContentEncoding(filePath: string) {
 	if (filePath.endsWith('.gz')) {

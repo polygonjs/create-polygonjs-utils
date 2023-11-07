@@ -23,6 +23,7 @@
 		"prepare_bin": "echo '#!/usr/bin/env node\n'|cat - dist/s3/build.cjs > /tmp/out && mv /tmp/out dist/s3/build.cjs && chmod +x dist/s3/build.cjs"
 	},
 	"devDependencies": {
+		"@types/mime-types": "2.1.4",
 		"@types/node": "20.8.10",
 		"@typescript-eslint/eslint-plugin": "6.10.0",
 		"@typescript-eslint/parser": "6.10.0",
@@ -36,6 +37,7 @@
 		"chalk": "5.3.0",
 		"dotenv": "16.3.1",
 		"esbuild": "0.19.5",
+		"mime-types": "2.1.35",
 		"rimraf": "5.0.5"
 	}
 }
