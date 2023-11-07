@@ -29,9 +29,7 @@ function prefixCommandByPackageManager(cmdWithArgs: CmdWithArgs): CmdWithArgs {
 }
 
 const VITE_CONFIG = `
-import {defineConfig, PluginOption} from 'vite';
-// import {visualizer} from 'rollup-plugin-visualizer';
-import checker from 'vite-plugin-checker';
+import { defineConfig } from 'vite';
 import BASE_CONFIG from './vite.config';
 
 // https://vitejs.dev/config/
