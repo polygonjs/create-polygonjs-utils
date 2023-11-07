@@ -10,6 +10,9 @@
 		"type": "git",
 		"url": "https://github.com/polygonjs/create-polygonjs-utils"
 	},
+	"bin": {
+		"polygonjs_build_s3": "dist/s3/build.js"
+	},
 	"scripts": {
 		"dev": "vite",
 		"build": "rm -rf dist/* && yarn build_clean_build && yarn build_s3_build && yarn build_s3_upload",
