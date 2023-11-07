@@ -12,11 +12,11 @@
 	},
 	"scripts": {
 		"dev": "vite",
-		"build": "yarn build_clean_build && yarn build_s3_build && yarn build_s3_upload",
+		"build": "rm -rf dist/* && yarn build_clean_build && yarn build_s3_build && yarn build_s3_upload",
 		"preview": "vite preview",
-		"build_clean_build": "tsc src/cleanBuild.ts --target ESNext --module nodenext --moduleResolution nodenext --strict false --esModuleInterop true --skipLibCheck true --preserveConstEnums true --isolatedModules --allowJs --removeComments false --declaration false --outDir dist",
-		"build_s3_upload": "tsc src/s3/upload.ts --target ESNext --module nodenext --moduleResolution nodenext --strict false --esModuleInterop true --skipLibCheck true --preserveConstEnums true --isolatedModules --allowJs --removeComments false --declaration false --outDir dist/s3",
-		"build_s3_build": "tsc src/s3/build.ts --target ESNext --module nodenext --moduleResolution nodenext --strict false --esModuleInterop true --skipLibCheck true --preserveConstEnums true --isolatedModules --allowJs --removeComments false --declaration false --outDir dist/s3"
+		"build_clean_build": "esbuild src/cleanBuild.ts --bundle --platform=node --target=node16.15.1 --outfile=dist/cleanBuild.cjs",
+		"build_s3_upload": "esbuild src/s3/upload.ts --bundle --platform=node --target=node16.15.1 --outfile=dist/s3/upload.cjs",
+		"build_s3_build": "esbuild src/s3/build.ts --bundle --platform=node --target=node16.15.1 --outfile=dist/s3/build.cjs"
 	},
 	"devDependencies": {
 		"@types/node": "20.8.10",
@@ -31,6 +31,7 @@
 		"@aws-sdk/credential-providers": "3.444.0",
 		"chalk": "5.3.0",
 		"dotenv": "16.3.1",
+		"esbuild": "^0.19.5",
 		"rimraf": "^5.0.5"
 	}
 }

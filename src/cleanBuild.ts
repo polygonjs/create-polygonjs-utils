@@ -1,2 +1,2 @@
-import {cleanBuild} from './cleanBuildCommon';
+import {cleanBuild} from './cleanBuildCommon.js';
 cleanBuild();

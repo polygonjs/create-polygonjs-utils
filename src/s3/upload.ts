@@ -1,2 +1,2 @@
-import {uploadToS3} from './uploadCommon';
+import {uploadToS3} from './uploadCommon.js';
 uploadToS3();
