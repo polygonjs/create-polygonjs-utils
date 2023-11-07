@@ -12,7 +12,7 @@
 	},
 	"scripts": {
 		"dev": "vite",
-		"build": "yarn build_s3_build && yarn build_s3_upload",
+		"build": "yarn build_clean_build && yarn build_s3_build && yarn build_s3_upload",
 		"preview": "vite preview",
 		"build_clean_build": "tsc src/cleanBuild.ts --target ESNext --module nodenext --moduleResolution nodenext --strict false --esModuleInterop true --skipLibCheck true --preserveConstEnums true --isolatedModules --allowJs --removeComments false --declaration false --outDir dist",
 		"build_s3_upload": "tsc src/s3/upload.ts --target ESNext --module nodenext --moduleResolution nodenext --strict false --esModuleInterop true --skipLibCheck true --preserveConstEnums true --isolatedModules --allowJs --removeComments false --declaration false --outDir dist/s3",
