@@ -8,3 +8,5 @@ public
 .gitignore
 .prettierrc.json
 jest.config.js
+index.html
+tsconfig.json
