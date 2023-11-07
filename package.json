@@ -1,6 +1,6 @@
 {
   "name": "create-polygonjs-utils",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
   "description": "utility function to build and upload a Polygonjs project",
   "author": "Guillaume Fradin",
