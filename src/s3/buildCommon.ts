@@ -64,16 +64,21 @@ async function executeCommand(command: string, args: string[]): Promise<void> {
 	});
 }
 
-export async function buildForS3() {
+interface BuildForS3Options {
+	typescript: boolean;
+}
+export async function buildForS3(options: BuildForS3Options) {
 	// write config
 	const s3ConfigFileName = `vite.config.s3.ts`;
 	fs.writeFileSync(s3ConfigFileName, VITE_CONFIG);
 
 	// build
-	const cmdsWithArgs: CmdWithArgs[] = [
-		{cmd: `tsc`, args: []},
-		{cmd: `vite`, args: ['build', '--base', baseUrl, '--config', s3ConfigFileName]},
-	];
+	const cmdsWithArgs: CmdWithArgs[] = [];
+	if (options.typescript) {
+		cmdsWithArgs.push({cmd: `tsc`, args: []});
+	}
+	cmdsWithArgs.push({cmd: `vite`, args: ['build', '--base', baseUrl, '--config', s3ConfigFileName]});
+
 	for (const cmdWithArgs of cmdsWithArgs) {
 		const prefixedCmd = prefixCommandByPackageManager(cmdWithArgs);
 		await executeCommand(prefixedCmd.cmd, prefixedCmd.args);
