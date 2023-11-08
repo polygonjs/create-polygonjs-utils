@@ -22,7 +22,7 @@ function prefixCommandByPackageManager(cmdWithArgs: CmdWithArgs): CmdWithArgs {
 		}
 		case 'npm': {
 			const args: string[] = ['run', cmdWithArgs.cmd, ...cmdWithArgs.args];
-			const cmd = `npm`;
+			const cmd = `npx`; // npm run vite does not work, so we use npx
 			return {cmd, args};
 		}
 	}
@@ -49,6 +49,7 @@ export default defineConfig({
 `;
 
 async function executeCommand(command: string, args: string[]): Promise<void> {
+	console.log(`> ${command} ${args.join(' ')}`);
 	return new Promise((resolve, reject) => {
 		const spawnedProcess = spawn(command, args, {stdio: 'inherit', shell: true});
 
