@@ -21,7 +21,7 @@ function prefixCommandByPackageManager(cmdWithArgs: CmdWithArgs): CmdWithArgs {
 			return {cmd, args};
 		}
 		case 'npm': {
-			const args: string[] = ['run', cmdWithArgs.cmd, ...cmdWithArgs.args];
+			const args: string[] = [cmdWithArgs.cmd, ...cmdWithArgs.args];
 			const cmd = `npx`; // npm run vite does not work, so we use npx
 			return {cmd, args};
 		}
