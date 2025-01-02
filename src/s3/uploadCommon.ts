@@ -58,7 +58,7 @@ function getContentEncoding(filePath: string) {
 
 async function uploadFile(filePath: string, relativePath: string): Promise<void> {
 	const fileContent = fs.readFileSync(filePath);
-	const bucketPath = `${bucketFolder}/${sceneName}/v${version}/${relativePath}`;
+	const uploadedFilePath = `${bucketFolder}/${sceneName}/v${version}/${ensureFilePathWebFriendly(relativePath)}`;
 
 	const contentType = getContentType(filePath);
 	const contentEncoding = getContentEncoding(filePath);
@@ -70,7 +70,7 @@ async function uploadFile(filePath: string, relativePath: string): Promise<void>
 
 	const params: PutObjectCommandInput = {
 		Bucket: bucketName,
-		Key: bucketPath,
+		Key: uploadedFilePath,
 		Body: fileContent,
 		ACL: 'public-read',
 		ContentType: contentType,
@@ -118,4 +118,10 @@ async function _uploadToS3(exportFolder: string) {
 
 export async function uploadToS3() {
 	await _uploadToS3(EXPORT_FOLDER);
+}
+
+function ensureFilePathWebFriendly(filePath: string) {
+	// this ensures that path found in windows,
+	// which have backslashes, is web-friendly with forward slashes
+	return filePath.replace(/\\/g, '/');
 }
